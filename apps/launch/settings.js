@@ -19,7 +19,7 @@
       value: settings.vectorsize || 10,
       min:10, max: 20,step:1,wrap:true,
       onchange: (m) => {save('vectorsize', m)}
-    }
+    },
     'Show Icons': {
       value: settings.showicons || true,
       format: v => v ? "On" : "Off";
