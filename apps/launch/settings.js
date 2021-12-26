@@ -22,7 +22,7 @@
     },
     'Show Icons': {
       value: settings.showicons || true,
-      format: v => v ? "On" : "Off";
+      format: v => v ? "On" : "Off",
       onchange: (m) => {save('showicons', m)}
     }
   };
