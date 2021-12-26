@@ -43,7 +43,7 @@ function drawApp(i, r) {
   var app = apps[i];
   if (!app) return;
   g.clearRect((r.x),(r.y),(r.x+r.w-1), (r.y+r.h-1));
-  if(showicons && app.icon){
+  if(!hideicons && app.icon){
     g.setFont(font).setFontAlign(-1,0).drawString(app.name,64*scaleval,r.y+(32*scaleval));
     try {g.drawImage(app.icon,8*scaleval, r.y+(8*scaleval), {scale: scaleval});} catch(e){}
   }
