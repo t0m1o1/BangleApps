@@ -20,10 +20,10 @@
       min:10, max: 20,step:1,wrap:true,
       onchange: (m) => {save('vectorsize', m)}
     },
-    'Show Icons': {
-      value: settings.showicons || true,
+    'Hide Icons': {
+      value: settings.hideicons || false,
       format: v => v ? "On" : "Off",
-      onchange: (m) => {save('showicons', m)}
+      onchange: (m) => {save('hideicons', m)}
     }
   };
   E.showMenu(appMenu);
