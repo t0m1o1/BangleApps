@@ -2,6 +2,7 @@ var s = require("Storage");
 let fonts = g.getFonts();
 var scaleval = 1;
 var vectorval = 20;
+var showicons = true;
 var font = g.getFonts().includes("12x20") ? "12x20" : "6x8:2";
 let settings = require('Storage').readJSON("launch.json", true) || {};
 if ("vectorsize" in settings) {
@@ -16,6 +17,9 @@ if ("font" in settings){
         font = settings.font;
         scaleval = (font.split('x')[1])/20;
     }
+}
+if ("showicons" in settings){
+    showicons = settings.showicons;
 }
 var apps = s.list(/\.info$/).map(app=>{var a=s.readJSON(app,1);return a&&{name:a.name,type:a.type,icon:a.icon,sortorder:a.sortorder,src:a.src};}).filter(app=>app && (app.type=="app" || app.type=="clock" || !app.type));
 apps.sort((a,b)=>{
@@ -39,8 +43,13 @@ function drawApp(i, r) {
   var app = apps[i];
   if (!app) return;
   g.clearRect((r.x),(r.y),(r.x+r.w-1), (r.y+r.h-1));
-  g.setFont(font).setFontAlign(-1,0).drawString(app.name,64*scaleval,r.y+(32*scaleval));
-  if (app.icon) try {g.drawImage(app.icon,8*scaleval, r.y+(8*scaleval), {scale: scaleval});} catch(e){}
+  if(showicons && app.icon){
+    g.setFont(font).setFontAlign(-1,0).drawString(app.name,64*scaleval,r.y+(32*scaleval));
+    try {g.drawImage(app.icon,8*scaleval, r.y+(8*scaleval), {scale: scaleval});} catch(e){}
+  }
+  else{
+    g.setFont(font).setFontAlign(-1,0).drawString(app.name,8*scaleval,r.y+(32*scaleval));
+  }
 }
 
 g.clear();
