@@ -2,7 +2,7 @@ var s = require("Storage");
 let fonts = g.getFonts();
 var scaleval = 1;
 var vectorval = 20;
-var showicons = true;
+var hideicons = false;
 var font = g.getFonts().includes("12x20") ? "12x20" : "6x8:2";
 let settings = require('Storage').readJSON("launch.json", true) || {};
 if ("vectorsize" in settings) {
@@ -18,8 +18,8 @@ if ("font" in settings){
         scaleval = (font.split('x')[1])/20;
     }
 }
-if ("showicons" in settings){
-    showicons = settings.showicons;
+if ("hideicons" in settings){
+    hideicons = settings.hideicons;
 }
 var apps = s.list(/\.info$/).map(app=>{var a=s.readJSON(app,1);return a&&{name:a.name,type:a.type,icon:a.icon,sortorder:a.sortorder,src:a.src};}).filter(app=>app && (app.type=="app" || app.type=="clock" || !app.type));
 apps.sort((a,b)=>{
